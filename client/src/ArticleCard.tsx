@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 
 interface Props {
   article: Article;
-  addToCart:Function;
+  addToCart:(article:Article)=>void;
 }
 var intlNumberFormatValues = ["de-DE", "currency", "EUR"];
 export var formatter = new Intl.NumberFormat(intlNumberFormatValues[0], {

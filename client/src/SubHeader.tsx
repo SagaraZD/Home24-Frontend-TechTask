@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from 'react';
 import { Category } from "./types";
 import styled from "@emotion/styled";
 import { MenuMobile } from "./Menu";
+import { Modal, Button , Col } from "react-bootstrap";
 
 interface Props {
   total: Number;
@@ -9,6 +10,7 @@ interface Props {
   name: String;
   categories: Category[];
 }
+
 
 const SubHeaderContainer = styled.div`
   background: #fff;
@@ -24,7 +26,26 @@ const Heading = styled.div`
 `;
 
 const Cart = styled.div`
-  float: left;
+    float: right;
+    position: relative;
+    top: 20px;
+  i{
+    color: #f45334;
+    font-size: 20px;
+    cursor:pointer;
+  }
+  span{
+    font-size: 14px;
+    position: relative;
+    bottom: 10px;
+    font-weight: bold;
+  }
+  @media only screen and (max-width: 767px) {
+    float: left;
+    margin-left: 20px;
+    top: 11px;
+ }
+}
 `;
 
 export const SubHeader: React.FC<Props> = ({
@@ -33,6 +54,13 @@ export const SubHeader: React.FC<Props> = ({
   name,
   categories,
 }) => {
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    
+
+
   return (
     <SubHeaderContainer>
       <Heading>
@@ -42,9 +70,25 @@ export const SubHeader: React.FC<Props> = ({
         </h1>
       </Heading>
 
-      <Cart>Cart({total})</Cart>
+      <Cart>
+        <i className="fa" onClick={handleShow}>&#xf07a;</i> <span> {total} </span>
+      </Cart>
       <MenuMobile list={categories} />
       <div className={"clear"} />
+
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Cart</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose}>
+            Got to checkout
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
     </SubHeaderContainer>
   );
 };

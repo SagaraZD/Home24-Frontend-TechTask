@@ -65,15 +65,13 @@ class ArticleList extends React.Component {
     xhr.onload = () => {
       if (xhr.status === 200) {
         var response = JSON.parse(xhr.response);
-
         this.setState({ categories: response.data.categories });
       }
     };
   }
 
-  addToCart = ({ article }: { article: Article }) => {
-    console.log('ccc', article)
-    this.setState({ cartList: article });
+  addToCart = ( article : Article ) => {
+    this.setState({ cartList: this.state.cartList.concat(article) });
   };
 
   render() {
@@ -84,8 +82,6 @@ class ArticleList extends React.Component {
     });
 
     const HeaderContainer = styled.div` position: relative;`;
-
-    console.log('cartList', this.state.cartList)
 
     return (
       <div className={"page"}>
@@ -118,7 +114,7 @@ class ArticleList extends React.Component {
                   <SubHeader
                     count={this.state.categories[0].articleCount}
                     name={this.state.categories[0].name}
-                    total={1}
+                    total={this.state.cartList.length}
                     categories={this.state.categories}
                   />
                   <div className={"articles"}>{articles}</div>
