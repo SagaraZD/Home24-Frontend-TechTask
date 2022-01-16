@@ -9,6 +9,13 @@ export default function Search() {
     transform: translate(0%, -49%);
     cursor: pointer;
 
+    @media only screen and (max-width: 600px) {
+      top: 2em;
+      position: relative;
+      width: 250px;
+      margin: 0 auto;
+    }
+
     @keyframes  {
       0% {
         transform: rotate(0);
@@ -48,12 +55,23 @@ export default function Search() {
         color:#a1a1a1;
       }
     }
+    @media only screen and (max-width: 600px) {
+      width: 250px;
+      &::placeholder {
+        color:#a1a1a1;
+      }
+      color: #000;
+      &:hover {
+        width: 250px;
+        }
+      }
+    }
   `;
   
 
   return (
     <div>
-      <Main>
+      <Main className="search">
         <form name="search">
           <Input type="text" name="txt" placeholder="What are you looking for?"></Input>
         </form>

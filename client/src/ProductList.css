@@ -19,6 +19,9 @@
 .item{
   min-height: 285px;
 }
+.item img{
+  width: 100%;
+}
 .item .name{
   min-height: 50px;
 }
@@ -37,7 +40,4 @@
 .content small{
   color: #f45334;
   font-size: 24px;
-}
-.content h1 {
-  margin-bottom: 25px;
 }

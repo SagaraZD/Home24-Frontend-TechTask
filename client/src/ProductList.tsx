@@ -1,70 +1,24 @@
 import React from "react";
-
 import { Category, Article } from "./types";
-import { css } from "@emotion/css";
 import styled from "@emotion/styled";
 import "./ProductList.css";
 import { Container, Row, Col } from "react-bootstrap";
 import Search from "./Search";
 import Loader from "./Loader";
-
-var intlNumberFormatValues = ["de-DE", "currency", "EUR"];
-
-export var formatter = new Intl.NumberFormat(intlNumberFormatValues[0], {
-  style: intlNumberFormatValues[1],
-  currency: intlNumberFormatValues[2],
-});
+import { MenuDesktop } from "./Menu";
+import { SubHeader } from "./SubHeader";
+import { ArticleCard } from "./ArticleCard";
+import Logo from "./Logo";
 
 type State = {
   categories: Category[];
-};
-export var ArticleCard = ({ article }: { article: Article }) => {
-  const Button = styled.button`
-    border: none;
-    background: #f45334;
-    border-radius: 4px;
-    color: #fff;
-    font-size: 16px;
-    line-height: 23px;
-    width: 100%;
-    padding: 5px 0px;
-    &:hover {
-      color: white;
-      background: #e72500;
-      text-decoration: none;
-    }
-  `;
-
-  const Main = styled.div`
-    margin-bottom: 20px;
-    position: relative;
-    padding: 20px;
-    background: #fff;
-    cursor: pointer;
-    border-radius: 5px;
-    &:hover {
-      box-shadow: 0 0 20px rgb(0 0 0 / 10%);
-      z-index: 7;
-    }
-  `;
-  return (
-    <Main>
-      <div className={"item"}>
-        <img src={article.images[0].path} />
-        <div className={"name"}>{article.name}</div>
-        <div className={"price"}>
-          {formatter.format(article.prices.regular.value / 100)}
-        </div>
-      </div>
-
-      <Button>Add to cart</Button>
-    </Main>
-  );
+  cartList: Article[];
 };
 
 class ArticleList extends React.Component {
   state: State = {
     categories: [],
+    cartList: [],
   };
 
   componentDidMount() {
@@ -117,34 +71,37 @@ class ArticleList extends React.Component {
     };
   }
 
+  addToCart = ({ article }: { article: Article }) => {
+    console.log('ccc', article)
+    this.setState({ cartList: article });
+  };
+
   render() {
     var articles = this.state.categories.map((category) => {
-      return category.categoryArticles.articles.map((article) => {
-        return <ArticleCard article={article} />;
+      return category.categoryArticles.articles.map((article, index) => {
+        return <ArticleCard key={index} article={article} addToCart={this.addToCart} />;
       });
     });
+
+    const HeaderContainer = styled.div` position: relative;`;
+
+    console.log('cartList', this.state.cartList)
 
     return (
       <div className={"page"}>
         <div className={"header"}>
           <Container>
-            <div
-              className={css`
-                position: relative;
-              `}
-            >
-              <div
-                className={css`
-                  width: 155px;
-                  float: left;
-                `}
-              >
-                <a href="/">
-                  <img src={"/home24_logo.svg"} alt="Logo" />
-                </a>
-              </div>
-              <Search />
-            </div>
+            <HeaderContainer>
+              <Row>
+                <Col md={3} sm={12}>
+                  <Logo />
+                </Col>
+
+                <Col md={3} sm={12}>
+                  <Search />
+                </Col>
+              </Row>
+            </HeaderContainer>
           </Container>
 
           <div className={"clear"} />
@@ -153,35 +110,23 @@ class ArticleList extends React.Component {
         <Container>
           {this.state.categories.length ? (
             <Row>
-              <Col>
-                <div className={"sidebar"}>
-                  <h3>Kategorien</h3>
-                  <ul>
-                    {this.state.categories[0].childrenCategories.map(
-                      ({ name, urlPath }) => {
-                        return (
-                          <li>
-                            <a href={`/${urlPath}`}>{name}</a>
-                          </li>
-                        );
-                      }
-                    )}
-                  </ul>
-                </div>
+              <Col md={3} sm={12}>
+                <MenuDesktop list={this.state.categories} />
               </Col>
-              <Col xs={9}>
+              <Col md={9} sm={12}>
                 <div className={"content"}>
-                  <h1>
-                    {this.state.categories[0].name}
-                    <small> ({this.state.categories[0].articleCount})</small>
-                  </h1>
-
+                  <SubHeader
+                    count={this.state.categories[0].articleCount}
+                    name={this.state.categories[0].name}
+                    total={1}
+                    categories={this.state.categories}
+                  />
                   <div className={"articles"}>{articles}</div>
                 </div>
               </Col>
             </Row>
           ) : (
-            <Loader/>
+            <Loader />
           )}
         </Container>
 

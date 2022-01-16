@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #f4f4f4; 
+  background: #f4f4f4;
 }
 
 .page > * {
@@ -21,10 +21,11 @@ body {
   -webkit-transition: top 0.3s ease 0.1s;
   position: relative;
   margin-bottom: 2em;
-  background: #fff; 
+  background: #fff;
   position: sticky;
   top: 0;
   z-index: 999;
+  height: 100px;
 }
 
 .header input {
@@ -102,7 +103,7 @@ body {
 .clear {
   clear: both !important;
 }
-.fa-search {
+.search .fa-search {
   position: absolute;
   top: 50%;
   right: 3px;
@@ -111,6 +112,7 @@ body {
   color: #f45334;
   transition: 0.2s;
 }
+
 .lds-ripple {
   display: inline-block;
   position: relative;
@@ -141,5 +143,37 @@ body {
     width: 72px;
     height: 72px;
     opacity: 0;
+  }
+}
+.navbar{
+  float: right;
+}
+.navbar-light .navbar-toggler {
+  color: #f45334;
+  box-shadow: none;
+}
+.offcanvas {
+  background: #35302d;
+  color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+}
+.offcanvas .btn-close {
+  background-color: #f45334;
+}
+.offcanvas-body ul a {
+  color: #fff;
+}
+
+.offcanvas-body ul a:hover {
+  color: #f45334;
+}
+
+@media only screen and (max-width: 600px) {
+  .header {
+    height: 170px;
+  }
+  .search .fa-search {
+    top: 19px;
   }
 }
