@@ -145,7 +145,7 @@ body {
     opacity: 0;
   }
 }
-.navbar{
+.navbar {
   float: right;
 }
 .navbar-light .navbar-toggler {
@@ -153,7 +153,6 @@ body {
   box-shadow: none;
   border: none;
   position: relative;
-
 }
 .offcanvas {
   background: #35302d;
@@ -174,6 +173,21 @@ body {
 .navbar-toggler-icon {
   position: relative;
   bottom: 5px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #f45334;
+  border-color: #f45334;
+}
+.btn-primary:hover {
+  border-color: #e72500;
+  background-color: #e72500;
+}
+.btn-secondary {
+  color: #fff;
+  background: #3c3735;
+  border-color: #3c3735;
 }
 
 @media only screen and (max-width: 600px) {

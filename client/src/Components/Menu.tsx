@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Navbar, Offcanvas, Nav } from "react-bootstrap";
 
-import { Category } from "./types";
+import { Category } from "../types";
 
 interface Props {
   list: Category[];

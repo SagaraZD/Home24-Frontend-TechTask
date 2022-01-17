@@ -16,7 +16,7 @@ export default function Search() {
       margin: 0 auto;
     }
 
-    @keyframes  {
+    @keyframes {
       0% {
         transform: rotate(0);
         animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
@@ -67,13 +67,16 @@ export default function Search() {
       }
     }
   `;
-  
 
   return (
     <div>
       <Main className="search">
         <form name="search">
-          <Input type="text" name="txt" placeholder="What are you looking for?"></Input>
+          <Input
+            type="text"
+            name="txt"
+            placeholder="What are you looking for?"
+          ></Input>
         </form>
         <i className="fas fa-search search-icon"> </i>
       </Main>

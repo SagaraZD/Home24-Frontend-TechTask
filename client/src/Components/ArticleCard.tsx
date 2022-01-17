@@ -1,16 +1,16 @@
 import React from "react";
-import { Article } from "./types";
+import { Article } from "../types";
 import styled from "@emotion/styled";
 
 interface Props {
   article: Article;
-  addToCart:(article:Article)=>void;
+  addToCart: (article: Article) => void;
 }
 var intlNumberFormatValues = ["de-DE", "currency", "EUR"];
 export var formatter = new Intl.NumberFormat(intlNumberFormatValues[0], {
-    style: intlNumberFormatValues[1],
-    currency: intlNumberFormatValues[2],
-  });
+  style: intlNumberFormatValues[1],
+  currency: intlNumberFormatValues[2],
+});
 
 const Button = styled.button`
   border: none;
@@ -46,14 +46,14 @@ export const ArticleCard: React.FC<Props> = ({ article, addToCart }) => {
   return (
     <Main>
       <div className={"item"}>
-        <img src={article.images[0].path} />
+        <img src={article.images[0].path} alt={article.name}/>
         <div className={"name"}>{article.name}</div>
         <div className={"price"}>
           {formatter.format(article.prices.regular.value / 100)}
         </div>
       </div>
 
-      <Button onClick={()=>addToCart(article)}>Add to cart</Button>
+      <Button onClick={() => addToCart(article)}>Add to cart</Button>
     </Main>
   );
 };

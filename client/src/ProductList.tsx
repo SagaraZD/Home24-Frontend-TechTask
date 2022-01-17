@@ -3,22 +3,25 @@ import { Category, Article } from "./types";
 import styled from "@emotion/styled";
 import "./ProductList.css";
 import { Container, Row, Col } from "react-bootstrap";
-import Search from "./Search";
-import Loader from "./Loader";
-import { MenuDesktop } from "./Menu";
-import { SubHeader } from "./SubHeader";
-import { ArticleCard } from "./ArticleCard";
-import Logo from "./Logo";
+import Search from "./Components/Search";
+import Loader from "./Components/Loader";
+import Footer from "./Components/Footer";
+import { MenuDesktop } from "./Components/Menu";
+import { SubHeader } from "./Components/SubHeader";
+import { ArticleCard } from "./Components/ArticleCard";
+import Logo from "./Components/Logo";
 
 type State = {
   categories: Category[];
   cartList: Article[];
+  cartTotal: number;
 };
 
 class ArticleList extends React.Component {
   state: State = {
     categories: [],
     cartList: [],
+    cartTotal: 0,
   };
 
   componentDidMount() {
@@ -70,18 +73,34 @@ class ArticleList extends React.Component {
     };
   }
 
-  addToCart = ( article : Article ) => {
+  addToCart = (article: Article) => {
     this.setState({ cartList: this.state.cartList.concat(article) });
+    this.setState({
+      cartTotal: this.state.cartTotal + article.prices.regular.value,
+    });
+  };
+
+  clearCart = () => {
+    this.setState({ cartList: [] });
+    this.setState({ cartTotal: 0 });
   };
 
   render() {
     var articles = this.state.categories.map((category) => {
       return category.categoryArticles.articles.map((article, index) => {
-        return <ArticleCard key={index} article={article} addToCart={this.addToCart} />;
+        return (
+          <ArticleCard
+            key={index}
+            article={article}
+            addToCart={this.addToCart}
+          />
+        );
       });
     });
 
-    const HeaderContainer = styled.div` position: relative;`;
+    const HeaderContainer = styled.div`
+      position: relative;
+    `;
 
     return (
       <div className={"page"}>
@@ -116,6 +135,9 @@ class ArticleList extends React.Component {
                     name={this.state.categories[0].name}
                     total={this.state.cartList.length}
                     categories={this.state.categories}
+                    cartList={this.state.cartList}
+                    cartTotal={this.state.cartTotal}
+                    clearCart={this.clearCart}
                   />
                   <div className={"articles"}>{articles}</div>
                 </div>
@@ -126,10 +148,7 @@ class ArticleList extends React.Component {
           )}
         </Container>
 
-        <div className={"footer"}>
-          Alle Preise sind in Euro (€) inkl. gesetzlicher Umsatzsteuer und
-          Versandkosten.
-        </div>
+        <Footer />
       </div>
     );
   }
