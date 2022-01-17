@@ -3,7 +3,7 @@
 1) New UI chanegs , styles added
 2) Used react-bootstrap for responsive grid (https://react-bootstrap.github.io/)
 3) Used Emotion.js Styled components for major parts (https://emotion.sh/docs/styled?)
-4) Unit test added for main components
+4) Basic Unit tests added for main components
 
 
 ##### More improvements ( Sagara Dayananda)
