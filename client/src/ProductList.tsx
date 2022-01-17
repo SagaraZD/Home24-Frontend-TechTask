@@ -103,7 +103,7 @@ class ArticleList extends React.Component {
     `;
 
     return (
-      <div className={"page"}>
+      <div className={"page"} data-testid={'produtList'}>
         <div className={"header"}>
           <Container>
             <HeaderContainer>

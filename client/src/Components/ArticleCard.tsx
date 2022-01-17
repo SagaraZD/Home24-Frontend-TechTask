@@ -44,9 +44,13 @@ const Main = styled.div`
 
 export const ArticleCard: React.FC<Props> = ({ article, addToCart }) => {
   return (
-    <Main>
+    <Main data-testid={"ArticleCard"}>
       <div className={"item"}>
-        <img src={article.images[0].path} alt={article.name}/>
+        {article.images ? (
+          <img src={article.images[0].path} alt={article.name} />
+        ) : (
+          <></>
+        )}
         <div className={"name"}>{article.name}</div>
         <div className={"price"}>
           {formatter.format(article.prices.regular.value / 100)}

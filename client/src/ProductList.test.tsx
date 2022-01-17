@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import ProductList from './ProductList';
 
 test('renders the ProductList', () => {
-  const { getByText } = render(<ProductList />);
-  const linkElement = getByText(/home24/i);
+  const { getByTestId } = render(<ProductList />);
+  const linkElement = getByTestId('produtList');
   expect(linkElement).toBeInTheDocument();
 });

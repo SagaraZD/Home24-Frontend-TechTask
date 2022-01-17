@@ -9,7 +9,7 @@ interface Props {
 
 export const MenuDesktop: React.FC<Props> = ({ list }) => {
   return (
-    <div>
+    <div data-testid={"MenuDesktop"}>
       {/* Desktop */}
       <div className={"sidebar d-none d-md-block d-lg-block"}>
         <h3>Kategorien</h3>
@@ -29,7 +29,7 @@ export const MenuDesktop: React.FC<Props> = ({ list }) => {
 
 export const MenuMobile: React.FC<Props> = ({ list }) => {
   return (
-    <div>
+    <div  data-testid={"MenuMobile"}>
       {/* Mobile */}
       <Navbar
         expand={false}

@@ -70,7 +70,7 @@ export default function Search() {
 
   return (
     <div>
-      <Main className="search">
+      <Main className="search" data-testid={"Search"}>
         <form name="search">
           <Input
             type="text"

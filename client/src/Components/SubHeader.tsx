@@ -122,9 +122,11 @@ export const SubHeader: React.FC<Props> = ({
             </Button>
           ) : null}
 
-          <Button variant="primary" onClick={handleClose}>
-            Got to checkout
-          </Button>
+          {cartTotal ? (
+            <Button variant="primary" onClick={handleClose}>
+              Got to checkout
+            </Button>
+          ) : null}
         </Modal.Footer>
       </Modal>
     </SubHeaderContainer>
